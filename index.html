@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+function State(){
+    const [fahrenheit, NewFahrenheit] = React.useState("1")
+    const [celsius, NewCelsius] = React.useState("-17.2")
+
+
+function LowerHead({Text}){
+
+    return(
+        <>  
+        <h2 id="Aplha">{Text}</h2>
+        </>)
+}
+
+function Check(event){
+    const InpValue = (Number(event.target.value.slice(0,3)))
+
+
+    if((InpValue) === 0){
+        NewFahrenheit("")
+        NewCelsius("")
+    }
+    else{
+        NewFahrenheit(InpValue)
+const InpValue2 = (((InpValue - 32) * 5/9).toFixed(1))
+NewCelsius(parseFloat(InpValue2))
+    }
+
+}
+
+function CheckT(event){
+    const InpValue = (Number(event.target.value.slice(0,3)))
+
+    if((InpValue) === 0){
+        NewCelsius("")
+        NewFahrenheit("")
+    }
+
+    else{
+        NewCelsius(InpValue)
+
+const InpValue2 = (((InpValue * 9/5) + 32).toFixed(1))
+NewFahrenheit(parseFloat(InpValue2)) 
+    }
+    
+}
+
+    return(<>
+        <div id="content">
+            <div id="heading">
+            <h1 id="heading_h1">Fahrenheit to Celsius Converter</h1>
+            <h3>Enter A number at Fahrenheit or Celsius</h3>
+            <h4>You can also use the up and down arrows on the keyboard</h4>
+            </div>
+            <div id="LowerH">
+                <span id="span">
+                    <input 
+                    id="Digit" 
+                    type="number" 
+                    pattern="\d{3}" 
+                    onChange={Check}
+                    value={fahrenheit} 
+                    />
+                     <LowerHead value={fahrenheit} Text={"Fahrenheit"}/>
+                </span>
+                <span>
+                    <input 
+                    id="Digit" 
+                    type="number" 
+                    pattern="\d{3}" 
+                    onChange={CheckT}
+                    value={celsius}
+                    />
+                     <LowerHead value={celsius} Text={"Celsius"} />
+                </span>
+            </div>
+        </div>
+   </>)
+}
+
+function Container(){
+    return(
+        <div id="container">
+            <State/>
+        </div>
+    )
+}
+    function App(){
+        return(
+            <>
+            <div id="main">
+                <Container/>
+            </div>
+            </>
+        )
+    }
+
+
+    let reactRoot = ReactDOM.createRoot(document.getElementById("root"));
+    reactRoot.render(<App/>)
+  </script>
+</html>
